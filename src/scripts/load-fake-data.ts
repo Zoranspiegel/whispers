@@ -56,6 +56,8 @@ async function loadFakeData(numUsers: number): Promise<void> {
     }
 
     await client.query('commit');
+
+    console.log('🧞 Fake data successfully loaded');
   } catch (error) {
     await client.query('rollback');
     throw error;
