@@ -13,6 +13,7 @@
 }
 
 body {
+  height: 100vh;
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-lato), Arial, Helvetica, sans-serif;

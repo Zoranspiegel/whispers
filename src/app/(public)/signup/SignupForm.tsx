@@ -39,6 +39,7 @@ export default function SignupForm() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setUserState(userInitialState);
+    router.push('/feed');
   }
 
   // TOGGLE_PASSWORD_VISIBILITY
@@ -52,7 +53,7 @@ export default function SignupForm() {
   // RENDER
   return (
     <form
-      className="w-screen max-w-xs flex flex-col items-center gap-6 border-2 rounded-lg p-6"
+      className="w-screen max-w-xs flex flex-col items-center gap-4 border-2 rounded-lg p-6"
       onSubmit={handleSubmit}
     >
       <h1 className="text-2xl font-bold">Sign Up</h1>
