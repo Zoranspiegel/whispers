@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
-    <footer className="bg-purple-600 bg-opacity-20 text-center text-xs">
-      FOOTER
+    <footer className="flex items-center justify-center text-xs">
+      &copy; Whispers {new Date().getFullYear()}
     </footer>
   );
 }
