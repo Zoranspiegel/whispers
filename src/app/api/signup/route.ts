@@ -61,7 +61,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       .sign(jwtSecret);    
 
     // RESPONSE_&_COOKIE_CREATION
-    const response = NextResponse.json({ msg: body }, { status: 201 });
+    const response = NextResponse.json({ msg: 'User successfully created' }, { status: 201 });
     response.cookies.set('jwt-token', token, {
       sameSite: 'strict',
       httpOnly: true,

@@ -14,11 +14,7 @@ export default function LoginForm() {
   const router = useRouter();
   const [userState, setUserState] = useState<LoginUser>(userInitialState);
   const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
-  const [errorState, setErrorState] = useState<string[]>([
-    'Un error muy jodido',
-    'Otro error pero más suavecito',
-    'Este error si lo peta'
-  ]);
+  const [errorState, setErrorState] = useState<string[]>([]);
 
   // HANDLE_INPUT_CHANGE
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -31,10 +27,22 @@ export default function LoginForm() {
   }
 
   // HANDLE_SUBMIT
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setUserState(userInitialState);
-    router.push('/feed');
+    setErrorState([]);
+
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      body: JSON.stringify(userState)
+    });
+
+    const resJSON = await res.json();
+
+    if (!res.ok) {
+      setErrorState((prevState) => [...prevState, resJSON.error]);
+    } else {
+      router.push('/feed');
+    }
   }
 
   // TOGGLE_PASSWORD_VISIBILITY
