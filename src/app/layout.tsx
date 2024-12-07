@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
-import { Lato } from 'next/font/google';
+import { Baumans } from 'next/font/google';
 import './globals.css';
 
-const latoFont = Lato({
+const baumansFont = Baumans({
   subsets: ['latin'],
-  weight: ['100', '300', '400', '700', '900'],
-  variable: '--font-lato'
+  weight: '400',
+  variable: '--font-baumans'
 });
+
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -23,7 +24,7 @@ export default function RootLayout({
       <head>
         <script src="https://unpkg.com/react-scan/dist/auto.global.js" async />
       </head>
-      <body className={`${latoFont.variable} antialiased`}>{children}</body>
+      <body className={`${baumansFont.variable} antialiased`}>{children}</body>
     </html>
   );
 }

@@ -16,5 +16,5 @@ body {
   height: 100vh;
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-lato), Arial, Helvetica, sans-serif;
+  font-family: var(--font-baumans), Arial, Helvetica, sans-serif;
 }
