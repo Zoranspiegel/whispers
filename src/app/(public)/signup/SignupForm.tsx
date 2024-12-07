@@ -17,11 +17,7 @@ export default function SignupForm() {
   const [passwordVisibility, setPasswordVisibility] = useState<boolean>(false);
   const [confirmationVisibility, setConfirmationVisibility] =
     useState<boolean>(false);
-  const [errorState, setErrorState] = useState<string[]>([
-    'Un error muy jodido',
-    'Otro error pero más suavecito',
-    'Este error si lo peta'
-  ]);
+  const [errorState, setErrorState] = useState<string[]>([]);
 
   // HANDLE_INPUT_CHANGE
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
@@ -33,13 +29,31 @@ export default function SignupForm() {
     });
   }
 
-  // HANDLE_ERRORS
-
   // HANDLE_SUBMIT
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setUserState(userInitialState);
-    router.push('/feed');
+    setErrorState([]);
+
+    if (userState.password !== userState.confirmPassword) {
+      setErrorState((prevState) => [...prevState, 'Passwords not matching']);
+      return;
+    }
+
+    const res = await fetch('/api/signup', {
+      method: 'POST',
+      body: JSON.stringify(userState)
+    });
+
+    const resJSON = await res.json();
+
+    console.log(resJSON);
+
+    // ERRORS_HANDLER
+    if (!res.ok) {
+      setErrorState((prevState) => [...prevState, resJSON.error]);      
+    } else {
+      router.push('/feed');      
+    }
   }
 
   // TOGGLE_PASSWORD_VISIBILITY
